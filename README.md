@@ -1,1 +1,1 @@
-CS 313 PHP Base Code
+CS 313 PHP Base Code edited by Christopher Murray
