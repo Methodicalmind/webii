@@ -1,10 +1,4 @@
-<?php session_start();
-  if($_SESSION["items"] == "")
-  {
-    header('Location: index.php')
-    die();
-  }
-?>
+<?php session_start(); ?>
 <html>
   <head>
     <?php include 'head.php'; ?>
