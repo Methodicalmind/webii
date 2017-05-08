@@ -24,26 +24,25 @@
         echo '<table class="table table-hover">';
         echo '<tr><th>Item</th><th>Price</th></tr>';
         if (isset($_SESSION["duc"])){
-          echo '<td><img src="img/duc.jpg" class="product"></td>';
-          echo '<td>$16,999</td>';
+          echo '<tr><td><img src="img/duc.jpg" class="product"></td>';
+          echo '<td>$16,999</td></tr>';
           $total += 16999;
         }
         if (isset($_SESSION["gxr"])){
-          echo '<td><img src="img/gxr.jpg" class="product"></td>';
-          echo '<td>$17,895</td>';
+          echo '<tr><td><img src="img/gxr.jpg" class="product"></td>';
+          echo '<td>$17,895</td></tr>';
           $total += 17895;
         }
         if (isset($_SESSION["bmw"])){
-          echo '<td><img src="img/bmw.jpg" class="product"></td>';
-          echo '<td>$15,695</td>';
+          echo '<tr><td><img src="img/bmw.jpg" class="product"></td>';
+          echo '<td>$15,695</td></tr>';
           $total += 15695;
         }
         if (isset($_SESSION["cbr"])){
-          echo '<td><img src="img/cbr.jpg" class="product"></td>';
-          echo '<td>$19,799</td>';
+          echo '<tr><td><img src="img/cbr.jpg" class="product"></td>';
+          echo '<td>$19,799</td></tr>';
           $total += 19799;
         }
-        echo '</tr>';
         echo '</table>';
       ?>
       <div class="pull-right">

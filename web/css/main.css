@@ -59,7 +59,7 @@ input[type=checkbox] {
 input[type=checkbox] + label
 {
  	background: url("../img/plus.png") no-repeat;
-	background-size: 30px 30px;
+	background-size: 25px 30px;
 	height: 30px;
 	width: 30px;
 	display:inline-block;
@@ -73,7 +73,7 @@ input[type=checkbox] + label:img
 input[type=checkbox]:checked + label
 {
  	background: url("../img/minus.png") no-repeat;
-	background-size: 30px 30px;
+	background-size: 25px 30px;
 	height: 30px;
 	width: 30px;
 	display:inline-block;

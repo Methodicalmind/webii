@@ -3,7 +3,7 @@
   <head>
     <?php include 'head.php'; ?>
     <script type="text/javascript">
-      function submit(){
+      function validate(){
         if (document.getElementById("fname").value == ""){
           alert("Enter a First Name");
           return false;
@@ -28,6 +28,7 @@
           alert("Enter a Zip");
           return false;
         }
+        return true;
       }
     </script>
     <title>Store</title>
@@ -37,7 +38,7 @@
       <?php include 'nav.php'; ?>
       <h1>Checkout</h1>
       <form method="post" action="confirm.php" id="confirm"
-            onsubmit="return valid()">
+            onsubmit="return validate()">
         <div class="form-group row">
         <div class="col-10">
             First Name:
@@ -55,7 +56,6 @@
         </div>
         <button type="submit" class="btn btn-lg btn-yellow">Confirm</button>
       </form>
-      <p><?php echo $_SESSION["duc"]."yes"; ?></p>
     </div>
   </body>
 </html>
