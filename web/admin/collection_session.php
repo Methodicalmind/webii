@@ -8,5 +8,4 @@
     $_SESSION['album'] = $_POST['album'];
     $_SESSION['collection'] = $_POST['collection'];
     $_SESSION['cover_photo'] = $_POST['cp'];
-
 ?>

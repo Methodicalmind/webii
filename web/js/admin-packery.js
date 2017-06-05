@@ -1,6 +1,7 @@
 // external js: packery.pkgd.js, draggabilly.pkgd.js
 var list=new Array;
 var select_count = 0;
+var order=new Array;
 var $grid = $('.grid').packery({
   itemSelector: '.grid-item',
   gutter: 12,
@@ -19,26 +20,25 @@ function orderItems() {
   var itemElems = $grid.packery('getItemElements');
   $( itemElems ).each( function( i, itemElem ) {
     $(itemElem).attr("id", i + 1);
+      var img = $(itemElem).children("img").attr("src");
+      order.push(img);
   });
 }
 
 $("#save_order").click(function() {
     orderItems();
-    var img_order = [];
-
-    //iterates through each input field and pushes the name to the array
-//    $('div', $('.grid')).each(function() {
-//
-//    });
-
-
-//    $.each( $('.grid'), function(i, grid) {
-//       $('div', grid).each(function() {
-//            console.log($(Object).attr('id'));
-//            img_order.push(id);
-//       });
-//    });
-
+    var update_order = $.ajax({
+        type: 'post',
+        url: 'update_order.php',
+        data: {order: order}
+    });
+    update_order.done(function(data) {
+        alert("order updated " + data);
+//        location.reload();
+    });
+    update_order.fail(function(data){
+        alert("couldn't save img order");
+    });
 });
 
 $('#add_photos').click( function () {

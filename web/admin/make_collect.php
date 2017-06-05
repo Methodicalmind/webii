@@ -56,6 +56,6 @@ $statement->bindValue(":album_name", $new_album, PDO::PARAM_STR);
 $statement->bindValue(":collection_name", $new_collection, PDO::PARAM_STR);
 $statement->execute();
 
-copy('web_res_img/cover_photo/default.jpg', $make_wr.'default.jpg');
+copy('web_res_img/cover_photo/default.jpg', $make_wr.'\default.jpg');
 
 ?>
