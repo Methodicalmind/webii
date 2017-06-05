@@ -1,5 +1,11 @@
-<nav class="navbar navbar-inverse">
-  <div class="conatiner">
+<?php session_start();
+    if(!isset($_SESSION['user'])){
+        header('Location: ../collection_view.php');
+        die();
+    }
+?>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="conatiner-fluid">
     <ul class="nav navbar-nav">
       <?php
         $file = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);

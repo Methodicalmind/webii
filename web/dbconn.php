@@ -1,11 +1,11 @@
 <?php
-    $db = pg_connect("  host=localhost
-                        dbname=photosite
-                        user=ps
-                        password=Lasagna1
-                    ");
-    if (!$db) {
-      echo "An error occurred connecting to db.\n";
-      exit;
+    session_start();
+    include "login_cred.php";
+    try {
+        $dbconn = new PDO("pgsql:host=$dbHost;port=$dbPort;dbname=$dbName", $user, $pass);
+        $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $ex) {
+        echo "Error connecting to the db. Details: $ex";
+        die();
     }
 ?>

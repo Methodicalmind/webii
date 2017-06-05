@@ -22,6 +22,10 @@
 	float: right !important;
 	margin: 0px;
 }
+.navbar-fixed-top {
+    margin-top: 0;
+	position: fixed;
+}
 .container .jumbotron {
 	text-align: center;
 	border-radius: 0px;
@@ -95,54 +99,394 @@ input[type=checkbox]:checked + label
 	text-align: center;
 }
 
+#overlay {
+    display: block;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color:grey;
+    opacity:0.8;
+    z-index:1001;
+}
+#overlay-form {
+    display: block;
+    top: 250px;
+    left: 0;
+    right: 0;
+    border-radius: 15px;
+    border: 1px solid #bbb;
+    margin: auto;
+    text-align: left;
+    position: fixed;
+    height: auto;
+    background-color:#fff;
+    opacity:1;
+    z-index:1002;
+}
 
+#form-title {
+    padding-top: 25px;
+    padding-bottom: 40px;
+    margin-bottom: 10px;
+}
+
+.drop-files-container {
+    width: 500px;
+    height: 300px;
+    background-color: aquamarine;
+}
+
+.collection_thumbnail {
+    margin-top: 50px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.collection_thumbnail img {
+    width: auto;
+    height: 200px;
+    margin-right: 40px;
+}
+.side_menu {
+	position: fixed;
+    margin-top:50px;
+	height: 100%;
+	background-color: #f8f8f8;
+	border-right: 1px solid #e7e7e7;
+}
+.header {
+    height: 50px;
+    width: 100%
+    margin-top: 50px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e7e7e7;
+    position: fixed;
+    z-index: 1000;
+}
+.collection-header {
+    height: auto;
+    width: 100%;
+    margin-top: 50px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e7e7e7;
+}
+.loaded_php {
+    padding-top: 50px;
+    z-index: -1;
+}
+#form_data {
+    margin-top: 70px;
+    margin-left: 20px;
+}
+.flex-between {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.selected {
+    border: 3px solid #C89E00;
+}
+/******************************
+*
+*   packery
+*
+******************************/
+/* ---- grid ---- */
+
+.grid-client {
+  background: #fff;
+    margin: 0 auto;
+}
+.grid-admin {
+  background: #fff;
+    margin-left:105px;
+    padding-top: 100px;
+}
+
+/* clear fix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- .grid-item ---- */
+
+.grid-item {
+  float: left;
+
+}
+.grid-item img{
+    width: 233px;
+}
+
+.grid-item.is-dragging,
+.grid-item.is-positioning-post-drag img {
+  z-index: 1000;
+}
+
+.packery-drop-placeholder {
+  outline: 3px dashed hsla(0, 0%, 0%, 0.5);
+  outline-offset: -6px;
+  -webkit-transition: -webkit-transform 0.2s;
+          transition: transform 0.2s;
+}
+
+.grid-item-client {
+  float: left;
+}
+
+.grid-item-client img{
+  width: 360px;
+  height: auto;
+  float: left;
+}
+/******************************
+*
+*   admin header
+*
+******************************/
+#save_order {
+    margin-top: 8px;
+    margin-left: 15px;
+    position: fixed;
+    z-index: 1000;
+    color: white;
+}
+#add_photos {
+    margin-top: 8px;
+    right: 15px;
+    z-index: 1000;
+    position: fixed;
+    color: white;
+}
+#delete_selected {
+    margin-top: 8px;
+    right: 125px;
+    z-index: 1000;
+    position: fixed;
+    display: none;
+    color: white;
+}
+#make-cover-photo {
+    margin-top: 8px;
+    right: 265px;
+    z-index: 1000;
+    position: fixed;
+    display: none;
+    color: white;
+}
+#file_search {
+    position: fixed;
+    right: 15px;
+    z-index: 1000;
+}
+#reset_form {
+    position: fixed;
+    right: 45px;
+    z-index: 1000;
+}
+#img_upload {
+    position: fixed;
+    margin-left: 15px;
+    z-index: 1000;
+}
+#btn-new-collection {
+    margin-right: 8px;
+}
+.btn-collection-submit {
+    margin-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.close_form {
+    margin-top: 15px;
+}
+li list-options {
+    width: 100%;
+    height: 5px;
+}
+#client-view-btn {
+    position: fixed;
+    bottom: 50px;
+    z-index: 1005;
+}
+
+.lock {
+    margin-top: 23px;
+}
 
 /******************************
 *
+*   album list
 *
-*   Dynamic sorting pictures
-*
-*******************************/
-.reorder_link {
-    color: #3675B4;
-    border: solid 2px #3675B4;
-    border-radius: 3px;
-    text-transform: uppercase;
-    background: #fff;
-    font-size: 18px;
-    padding: 10px 20px;
-    margin: 15px 15px 15px 0px;
-    font-weight: bold;
+******************************/
+#sortable {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      width: 60%;
+}
+
+#sortable li {
+      margin: 0 5px 5px 5px;
+      padding: 5px;
+      font-size: 1.3em;
+      height: 1.7em;
+    width: 220px;
+}
+
+#sortable li:hover .trash { display: inline; }
+.trash {display: none;}
+
+#sortable li a {
+    color: black;
+}
+
+#sortable li a:hover {
     text-decoration: none;
-    transition: all 0.35s;
-    -moz-transition: all 0.35s;
-    -webkit-transition: all 0.35s;
-    -o-transition: all 0.35s;
-    white-space: nowrap;
-}
-.reorder_link:hover {
-    color: #fff;
-    border: solid 2px #3675B4;
-    background: #3675B4;
-    box-shadow: none;
-}
-#reorder-helper{margin: 18px 10px;padding: 10px;}
-.light_box {
-    background: #efefef;
-    padding: 20px;
-    margin: 10px 0;
-    text-align: center;
-    font-size: 1.2em;
 }
 
-.gallery{ width:100%; float:left; margin-top:100px;}
-.gallery ul{ margin:0; padding:0; list-style-type:none;}
-.gallery ul li{ padding:7px; border:2px solid #ccc; float:left; margin:10px 7px; background:none; width:auto; height:auto;}
-.gallery img{ width:250px;}
+.ui-state-highlight {
+    height: 1.5em;
+    line-height: 1.2em;
+}
+.flex-between {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.new-album-list-item input{
+    height: 30px;
+    margin-top: -5px;
+    margin-left: 1px;
+    width: 185px;
+}
 
-/* NOTICE */
-.notice, .notice a{ color: #fff !important; }
-.notice { z-index: 8888; }
-.notice a { font-weight: bold; }
-.notice_error { background: #E46360; }
-.notice_success { background: #657E3F; }
+/******************************
+*
+*   client view
+*
+******************************/
+ #fullscreen img {
+    position: fixed;
+     left: 0px;
+     right: 0px;
+    top: 70px;
+    max-width: 1200px;
+    max-height: 91%;
+    margin: auto;
+    z-index: 2000;
+}
+.overlay-white {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color: white;
+    z-index:1001;
+}
+#fullscreen {
+    display: none;
+}
+#fullscreen .close {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 1002;
+}
+.selected_album {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+/******************************
+*
+*   dropzone style
+*
+******************************/
+#actions {
+  margin: 2em 0;
+}
+
+/* Mimic table appearance */
+div.table {
+  display: table;
+}
+div.table .file-row {
+  display: table-row;
+}
+div.table .file-row > div {
+  display: table-cell;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+  padding: 8px;
+}
+div.table .file-row:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+/* The total progress gets shown by event listeners */
+#total-progress {
+    margin-top: 30px;
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
+
+/* Hide the progress bar when finished */
+#previews .file-row.dz-success .progress {
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
+
+/* Hide the complete button initially */
+#previews .file-row .complete {
+  display: none;
+}
+
+/* Hide the start and cancel buttons and show the complete button */
+
+#previews .file-row.dz-success .start,
+#previews .file-row.dz-success .cancel {
+  display: none;
+}
+#previews .file-row.dz-success .complete {
+  display: inline;
+}
+
+#loading {
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   position: fixed;
+   display: none;
+   opacity: 0.7;
+   background-color: #fff;
+   z-index: 1999;
+   text-align: center;
+}
+
+#loading-image {
+  position: absolute;
+    height: 100px;
+    width: 100px;
+  top: 300px;
+  left: auto;
+  right: auto;
+  z-index: 2000;
+}
+#loading-message {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: 420px;
+    left: auto;
+    right: auto;
+    z-index: 2000;
+}
