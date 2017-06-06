@@ -34,31 +34,26 @@ Packery.prototype.resize = function() {
   this.layout();
 };
 
-//$( function() {
-//  var $container = $('.packery').packery({
-//    itemSelector: '.item',
-//    columnWidth: 150,
-//    gutter: 20
-//  });
-//});
-
 var $grid = $('.grid-client').packery({
   itemSelector: '.grid-item-client',
   gutter: 8,
   columnWidth: 360
 });
 
-$(".grid-item-client").click(function(){
-   var img = $(this).find("img").attr("src");
-    document.getElementById("fill_img").setAttribute("src",img);
-    $("#fullscreen").css("display: block;");
-});
 $(".close").click(function(){
-    $("#fullscreen").css("display: none;");
+    document.getElementById("fullscreen").style.display = "none";
 });
+
 $("li").click(function(){
     $(this).siblings().removeClass("active");
     $(this).addClass("active");
     var a_id = $(this).attr("album-id");
     selectAlbum(a_id);
+});
+
+$("img").click(function(){
+//    var img = e.getAttribute("src");
+    var img = $(this).attr("src");
+    document.getElementById("fill_img").setAttribute("src",img);
+    document.getElementById("fullscreen").style.display = "block";
 });

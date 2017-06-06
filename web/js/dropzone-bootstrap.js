@@ -8,7 +8,7 @@ var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
   url: "upload.php", // Set the url
   thumbnailWidth: 80,
   thumbnailHeight: 80,
-  parallelUploads: 20,
+  parallelUploads: 10,
   previewTemplate: previewTemplate,
   autoQueue: false, // Make sure the files aren't queued until manually added
   previewsContainer: "#previews", // Define the container to display the previews
@@ -47,12 +47,15 @@ document.querySelector("#actions .cancel").onclick = function() {
   myDropzone.removeAllFiles(true);
 };
 
-myDropzone.on("queuecomplete", function(){
+myDropzone.on("queuecomplete", function(data){
+    document.getElementById("loading").style.display = "block";
     addToDB();
 });
 
 function addToDB() {
-        var add_db = $.ajax({
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("loading-message").innerHTML = "adding to database...";
+    var add_db = $.ajax({
         url: 'add_img_db.php',
     });
     add_db.done(function(data) {
@@ -70,8 +73,8 @@ function addToDB() {
 }
 
 function resize_img() {
-    $("#loading").css("display = block;");
-    $("#loading-message").html("resizing images");
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("loading-message").innerHTML = "resizing for web view...";
     var resize_img = $.ajax({
         url: 'resize_img.php',
     });
@@ -83,9 +86,8 @@ function resize_img() {
             resize_img();
         }
         else{
-            $("#loading").css("display = none;");
             alert("images will not be visiable");
         }
     });
-    $("#loading").css("display = none;");
+    document.getElementById("loading").style.display = "none";
 }

@@ -8,20 +8,10 @@
     $queryCollections = "SELECT c.id, c.name AS c_name, a.name AS a_name
                             FROM collection c
                             RIGHT JOIN album a ON a.collection_id = c.id;";
-    $queryCoverphotos = "SELECT c.name AS c_name,
-                                a.name AS a_name,
-                                wr.file_name AS c_photo
-                            FROM collection c
-                            JOIN web_res wr ON c.cover_photo = wr.id
-                            JOIN album a ON wr.album_id = a.id;";
 
     $statement = $dbconn->prepare($queryCollections);
     $statement->execute();
     $collections = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    $statement = $dbconn->prepare($queryCoverphotos);
-    $statement->execute();
-    $coverphotos = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -75,23 +65,8 @@
                     $i = 0;
                     $last_c = '';
                     foreach ($collections as $collect) {
-                        if($last_c == $collect['c_name'])
-                            continue;
-                        foreach ($coverphotos as $cp) {
-                            if($collect['c_name'] == $cp['c_name']){
-                            echo '<div><img src="web_res_img/'.
-                                  $cp['c_name'].'/'.$cp['a_name'].'/'.
-                                  $cp['c_photo'].'"
-                                  onclick="manageCollection(this)">';
-                            }
-                            else {
-                            echo '<div><img src="web_res_img/'.
-                                 $collect['c_name'].'/'.$collect['a_name'].'/'.
-                                 'default.jpg" onclick="manageCollection(this)">';
-                            }
-                            $i++;
-                        }
-                        $last_c = $collect['c_name'];
+						echo '<div><img onclick="manageCollection(this)" src="web_res_img/'.
+							 $collect['c_name'].'/'.$collect['a_name'].'/default.jpg">';
                         echo '<br/><h2>'.$collect['c_name'].'</h2></div>';
                     }
                 ?>

@@ -11,13 +11,13 @@
     $statement->bindValue(":c_name", $_SESSION['collection'], PDO::PARAM_STR);
     $statement->execute();
 
-    $album = $statement->fetchALL(PDO::FETCH_ASSOC);
+    $albums = $statement->fetchALL(PDO::FETCH_ASSOC);
     $count = 0;
     //generate nav
     echo '<nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="conatiner-fluid">
             <ul class="nav navbar-nav">';
-    foreach($album as $row){
+    foreach($albums as $row){
         if($count == 0) {
             echo '<li><a href="#" album-id="'.$row['id'].'" class="active">'
                   .$row['name'].'</a></li>';
@@ -28,6 +28,6 @@
         $count++;
     }
     echo '</ul><ul class="nav navbar-nav navbar-right">
-            <li><a href="../collection_view.php">Collections</a></li></ul>
+            <li><a href="manage_collection.php">Go Back</a></li></ul>
             </div></nav>';
 ?>

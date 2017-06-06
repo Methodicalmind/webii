@@ -31,7 +31,6 @@
     </script>
     </head>
     <body onload="firstAlbum()">
-
         <!-- page -->
         <div class="container-fluid">
             <?php include "client_nav.php" ?>

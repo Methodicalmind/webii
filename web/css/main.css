@@ -313,6 +313,7 @@ li list-options {
 #client-view-btn {
     position: fixed;
     bottom: 50px;
+    left: 30px;
     z-index: 1005;
 }
 

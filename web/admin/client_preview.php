@@ -1,44 +1,50 @@
 <?php
     session_start();
-    if(!isset($_SESSION['user'])){
-        header('Location: ../collection_view.php');
-        die();
-    }
-//    include "../dbconn.php";
-//    $collection = htmlspecialchars($_POST["collection"]);
-//    $selected_album = htmlspecialchars($_POST["selected_album"]);
-//    $query = "Select wr.id AS web_id,
-//                     wr.name AS web_name,
-//                     wr.img_order,
-//                     wr.file_name,
-//                      a.name AS album_name,
-//                      c.name AS collection_name
-//               FROM album a
-//               RIGHT JOIN collection c ON a.collection_id = c.id
-//               RIGHT JOIN web_res wr ON wr.album_id = a.id
-//               ORDER BY wr.img_order;";
-    //WHERE a.name = :selected_album
-//    $statement = $dbconn->prepare($query);
-    //$statement->bindValue(":selected_album", $selected_album, PDO::PARAM_STR);
-//    $statement->execute();
-//
-//    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+    include "../dbconn.php";
 ?>
-<head>
-    <?php include "admin_head.php"; ?>
-    <script src='https://masonry.desandro.com/masonry.pkgd.js'></script>
-</head>
-<nav class="navbar navbar-inverse">
-  <div class="conatiner-fluid">
-    <ul class="nav navbar-nav">
-      <?php
-        $file = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
-      ?>
-      <li><a href="manage_collection.php"
-        <?php if ($file === 'manage_collection') echo 'class="active"'?>>
-        Go Back</a></li>
-    </ul>
-      <div>Your are viewing as client</div>
-  </div>
-</nav>
-<?php include "../client/client_collection_view.php"; ?>
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src='https://unpkg.com/packery@2/dist/packery.pkgd.js'></script>
+    <script type="text/javascript">
+        function firstAlbum() {
+            var a_id = $("li a").first().attr("album-id");
+            selectAlbum(a_id);
+        }
+        function selectAlbum(id) {
+            var album_request = $.ajax({
+                type: 'post',
+                url: 'selected_album.php',
+                data: {a_id: id}
+            });
+            album_request.done(function(data) {
+               $(".selected_album").html(data);
+            });
+            album_request.fail(function(data) {
+               alert("an error occured: " + data);
+            });
+        }
+    </script>
+    </head>
+    <body onload="firstAlbum()">
+        <!-- page -->
+        <div class="container-fluid">
+            <?php include "admin_preview_nav.php" ?>
+            <p>viewing in client preview mode</p>
+            <div class="col-lg-12 col-md-12 col-sm-12 selected_album"></div>
+
+            <!-- display selected img-->
+            <div id="fullscreen">
+                <div class="overlay-white"></div>
+                <button class="close btn btn-lg">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <img id="fill_img" src="#">
+            </div>
+        </div>
+    </body>
+</html>

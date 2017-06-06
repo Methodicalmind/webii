@@ -23,7 +23,6 @@
       </script>
       <script src="../js/dropzone.js"></script>
       <script>
-        var Dropzone = require("enyo-dropzone");
         Dropzone.autoDiscover = false;
 
           function loadAlbumDefault() {
@@ -69,20 +68,20 @@
 -->
         <?php
             echo '<img id="cover" src="web_res_img/'.$_SESSION['collection'].'/';
-            echo $_SESSION['album'].'/'.$_SESSION['cover_photo'].'"';
+            echo $_SESSION['album'].'/default.jpg"';
             echo 'class="col-lg-12 col-md-12 col-sm-12">';
         ?>
         <ul id="sortable" class="col-lg-3 col-md-3 col-sm-3">
             <?php
                 $i = 1;
                 foreach ($results as $row) {
-echo '<li class="ui-state-default flex-between">
-<a id="album_'.$i.'" onclick="displayAlbum(this)" album-id="'.$row['id'].'">
-<span class="glyphicon glyphicon-resize-vertical"></span> '.$row['name'].'</a>
-    <div id="album-options">
-    <span class="glyphicon glyphicon-trash trash" album-id="'.$row['id'].'"></span>
-    </div>
-</li>';
+                    echo '<li class="ui-state-default flex-between">
+                    <a id="album_'.$i.'" onclick="displayAlbum(this)" album-id="'.$row['id'].'">
+                    <span class="glyphicon glyphicon-resize-vertical"></span> '.$row['name'].'</a>
+                        <div id="album-options">
+                        <span class="glyphicon glyphicon-trash trash" album-id="'.$row['id'].'"></span>
+                        </div>
+                    </li>';
                     $i++;
                 }
             ?>

@@ -30,7 +30,7 @@
     foreach($results as $img) {
         echo '<div class="grid-item-client">
             <img src="web_res_img/'.$_SESSION['collection'].'/'.$a_name.'/'
-            .$img["file_name"].'">
+            .$img["file_name"].'" class="file">
             </div>';
     }
     echo '</div><script src="../js/client-packery.js"></script>';
