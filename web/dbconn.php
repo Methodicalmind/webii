@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "login_cred.php";
+    include "heroku_cred.php";
     try {
         $dbconn = new PDO("pgsql:host=$dbHost;port=$dbPort;dbname=$dbName", $user, $pass);
         $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
