@@ -1,0 +1,12 @@
+{
+    "name": "node-rock-app",
+    "version": "1.0.0",
+    "description": "RPS Ranked",
+    "engines": {
+        "node": "6.10.2"
+    },
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    }
+}

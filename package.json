@@ -1,0 +1,15 @@
+{
+  "name": "rock-paper-scissors-test",
+  "version": "1.0.0",
+  "engines": {
+    "node": "6.10.2"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.3"
+  }
+}

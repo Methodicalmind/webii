@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Postage Required</title>
+</head>
+<body>
+	<h1>Postage Required</h1>
+
+	<form action="/price" method="get">
+    Item Weight: <input type="text" name="weight"><br/>
+	<select name="letter_type">
+		<option value="stamped">Stamped Letter</option>
+		<option value="metered">Metered Letter</option>
+		<option value="flats">Large Envelopes</option>
+		<option value="parcels">Parcels</option>
+	</select>
+	<br>
+	<input type="submit">
+	</form>
+</body>
+</html>
