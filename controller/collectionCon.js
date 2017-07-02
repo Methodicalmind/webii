@@ -6,13 +6,13 @@ function handleImgUpload(req, res) {
   form.multiples = true;
 
   // store all uploads in the following directory
-  form.uploadDir = 'model/high_res';
+  form.uploadDir = 'img/' + session.userId;
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
     fs.rename(file.path, path.join(form.uploadDir, file.name));
-    imgMod.convertImage(file.name);
+    collectionMod.convertImage(file.name);
   });
 
   // log any errors that occur
@@ -30,13 +30,12 @@ function handleImgUpload(req, res) {
 }
 
 function handleAlbumDelete(req, res) {
-    var album_name = req.params.id;
-
-    var status = imgMod.deleteAlbum();
+//    var album_name = req.params.id;
+//    var status = imgMod.deleteAlbum();
 }
 
 function handleCollectionPassword() {
-    imgMod.setPassword(req, res);
+//    imgMod.setPassword(req, res);
 }
 
 function handleNewAlbum(req, res) {
