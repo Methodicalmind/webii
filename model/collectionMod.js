@@ -13,6 +13,20 @@ function deleteAlbum() {
     //remove images associated from high_res and from db
 }
 
+function validate(password){
+    var queryString = 'SELECT salt FROM "user" WHERE name = "' + userName + '";'
+    pool.connect((err, client, done) => {
+        if (err) throw err
+        client.query(queryString (err, res) => {
+        done();
+        if (err) {
+            console.log(err.stack);
+        } else {
+            console.log(res.rows[0]);
+        }
+        });
+    });
+}
 
 
 function convertImage(fileName){
@@ -30,7 +44,7 @@ function width(w, fileName) {
     else if(w == 360)
         newName = "med_" + fileName; //client view grid
     else
-        newName = "sm_" + filename; //admin re-arrange/sort
+        newName = "sm_" + fileName; //admin re-arrange/sort
 
     //convert image
     sharp(dir + fileName)

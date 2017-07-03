@@ -8,6 +8,15 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser')
 
+const { Pool } = require('pg')
+
+const pool = new Pool({
+    user: 'dbuser',
+    host: 'database.server.com',
+    database: 'mydb',
+    password: 'secretpassword',
+    port: 3211,
+})
 
 //use
 app.use(express.static(__dirname + '/view'));
@@ -15,7 +24,12 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
-app.use(session({secret:'bhyb89tb2z2tyinbhifewhbisoubcq8097341', resave:true, saveUninitialized: false}));
+app.use(session({
+    secret:'bhyb89tb2z2tyinbhifewhbisoubcq8097341', 
+    resave:true, 
+    saveUninitialized: false,
+    cookie: { secure: true }
+}));
 
 
 //set
@@ -27,7 +41,7 @@ app.set('port', (process.env.PORT || 5000));
 
 //route
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/view/index.html');
+  res.sendFile(__dirname + '/view/upload.html');
 });
 
 app.get('/manage_collection', function(req, res) {
@@ -35,6 +49,7 @@ app.get('/manage_collection', function(req, res) {
 });
 
 app.post('/upload', collectionCon.handleImgUpload);
+app.post('/login', collectionCon.handleLogin);
 
 
 //listen

@@ -39,9 +39,45 @@ function loadAlbumList(){
     //every time this loads number the items and store that number in id
    alert("refeshed album list");
 }
+// $('#add_collection.ejs').on('submit', function (e) {
+//     e.preventDefault();
+//     var cn = $('#collection_name').val();
+//     var an = $('album_name').val();
+//     if(cn == '') {
+//         alert("Collection Name cannot be left blank.");
+//         return;
+//     }
+//     if(an == '')
+//         an.val() = "Proofs";
+//
+//     var formData = new FormData(this);
+//     $.ajax({
+//         type: 'POST',
+//         url: $(this).attr('action'),
+//         cache:false,
+//         contentType: false,
+//         processData: false,
+//         data: formData,
+//         success: function (data) {
+//             document.getElementById('overlay').style.display = "none";
+//             document.getElementById('overlay-form').style.display = "none";
+//             document.getElementById('add_collection.ejs').reset();
+//             window.location.href = "manage_collection.php";
+// //                    alert(data);
+//         },
+//         error: function(data){
+//             document.getElementById('overlay').style.display = "none";
+//             document.getElementById('overlay-form').style.display = "none";
+//             document.getElementById('add_collection.ejs').reset();
+//             alert("an error occured: " + data);
+//             window.location.href = "collections.php";
+//         }
+//     });
+// });
+
 function onLoad() {
-//event listeners
-document.querySelector(".trash").addEventListener("click", deleteAlbum);
-document.querySelector(".lock").addEventListener("click", setPassword);
-document.getElementById("add_album").addEventListener("click", addAlbum);
+    //event listeners
+    document.querySelector(".trash").addEventListener("click", deleteAlbum);
+    document.querySelector(".lock").addEventListener("click", setPassword);
+    document.getElementById("add_album").addEventListener("click", addAlbum);
 }

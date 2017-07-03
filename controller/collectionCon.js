@@ -1,3 +1,43 @@
+var userId;
+var userName;
+var collection;
+var collectionId;
+var album;
+var albumId;
+
+function handleLogin(req, res) {
+    userName = req.body.username;
+    var password = req.body.pass;
+    req.session.username = userName;
+    // userName.toUpperCase();
+    collectionMod.validate(password);
+    var data = {
+        uName: userName
+    }
+    // setUserId();
+    res.render('admin/view_collect', data);
+}
+
+function setUserId() {
+    for(var i = 0; i < userName.length; i++)
+        userId += userName.charCodeAt(i);
+    userId = Math.pow(userId, 2);
+    console.log(userName + "- id:" + userId)
+}
+function handleAlbumDelete(req, res) {
+//    var album_name = req.params.id;
+//    var status = imgMod.deleteAlbum();
+}
+
+function handleCollectionPassword() {
+//    imgMod.setPassword(req, res);
+}
+
+function handleNewAlbum(req, res) {
+    // collectionMod.addAlbum(req, res);
+}
+
+
 function handleImgUpload(req, res) {
   // creates form object to grab client image form object
   var form = new formidable.IncomingForm();
@@ -29,22 +69,10 @@ function handleImgUpload(req, res) {
   form.parse(req);
 }
 
-function handleAlbumDelete(req, res) {
-//    var album_name = req.params.id;
-//    var status = imgMod.deleteAlbum();
-}
-
-function handleCollectionPassword() {
-//    imgMod.setPassword(req, res);
-}
-
-function handleNewAlbum(req, res) {
-    imgMod.addAlbum(req, res);
-}
-
 module.exports = {
 	handleImgUpload: handleImgUpload,
     handleAlbumDelete: handleAlbumDelete,
     handleNewAlbum: handleNewAlbum,
-    handleCollectionPassword: handleCollectionPassword
+    handleCollectionPassword: handleCollectionPassword,
+    handleLogin: handleLogin
 };
