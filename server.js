@@ -24,7 +24,7 @@ app.use(session({
     store: new pgSession({
         pool : pgPool,                // Connection pool
     }),
-    secret:'jokes on you',
+    secret: 'jokes on me',
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false, maxAge: 30 * 24 * 60 * 60 * 1000 }
@@ -52,6 +52,7 @@ app.get('/addPhotos', collectionCon.handleAddPhotos);
 app.get('/uploadImg', collectionCon.handleImgUpload);
 app.post('/update_order', collectionMod.updateImgOrder);
 app.get('/album_sorting/:album', collectionCon.handleSelectedAlbum);
+app.post('/add_collection', collectionCon.handleNewCollection);
 
 
 

@@ -43,9 +43,10 @@ function updateImgOrder(req, res) {
         res.send("failed to update order");
     }
 }
+
 function getAlbumList(successCallback, failCallback, collection) {
     var queryString = "SELECT a.name FROM album a JOIN collection c ON c.id = a.collection_id" +
-                      " WHERE c.name = 'test_collection';";
+                      " WHERE c.name = '" + collection + "';";
     function onSuccess(res){
         successCallback(res.rows);
     }
@@ -115,10 +116,9 @@ function storeUser(success, fail, username, password){
     bcrypt.hash(password, 10, function(err, hash) {
         if(err) console.log(err);
         if(hash) {
-            // Store hash in your password DB.
-            // var insert = 'INSERT INTO "user" VALUES(' +
-            //     'DEFAULT, \'' + username + '\',\'' + hash + '\');';
-            var insert = 'SELECT * from "user"';
+            // Store hash password in DB.
+            var insert = 'INSERT INTO "user" VALUES(' +
+                'DEFAULT, \'' + username + '\',\'' + hash + '\');';
             queryDb(success, fail, insert);
         } else
             console.log("couldn't hash password");
@@ -132,21 +132,43 @@ function checkName(username){
     return newName;
 }
 
-function createUserDir(req) {
+function createUserDir(successCallback, failCallback, req) {
     //create dir
-    if (!fs.existsSync("../webii/img/" + req.session.userId)){
-        fs.mkdirSync("../webii/img/" + req.session.userId);
+    if (!fs.existsSync("view/img/" + req.session.userId)){
+        fs.mkdirSync("view/img/" + req.session.userId)
+        successCallback();
     }
+    else
+        failCallback("dir already exists or failed to make");
 }
 //end registration/login
+
+function addCollection(successCallback, failCallback, collection, username){
+    var date = getDate();
+    var queryString = "INSERT INTO collection VALUES (DEFAULT, '" + collection + "', NULL," +
+        "(Select id from \"user\" WHERE username = '" + username +"'), '" + date + "');";
+
+    function success(data){
+        successCallback();
+    }
+    function fail(){failCallback();}
+    queryDb(success, fail, queryString);
+}
+
+function addAlbum(successCallback, failCallback, collection, album){
+    var date = getDate();
+    var queryString = "INSERT INTO album VALUES (DEFAULT, '" + album + "'," +
+        "(Select id from collection WHERE name = '" + collection +"'), '" + date + "');";
+    function success(date){
+        successCallback();
+    }
+    function fail(){failCallback();}
+    queryDb(success, fail, queryString);
+}
+
 //upload/image
 function addPhotoToDB(successCallback, failCallback, filename, album){
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-
-    var date = month + "-" + day + "-" + year;
+    var date = getDate();
     var file = filename.split('.');
     var newName = uniqid(file[0] + "_") + ".jpg";
     var queryString = "INSERT INTO photo VALUES (" +
@@ -154,7 +176,7 @@ function addPhotoToDB(successCallback, failCallback, filename, album){
                         "'" + filename + "'," +
                         "'" + newName + "'," +
                         "Default," +
-                        "(SELECT id FROM album WHERE name = '" + album +"')," +
+                        "(SELECT id FROM album WHERE name = '" + album + "')," +
                         "'" + date + "'" +
                     ");";
     function onSuccess(res){
@@ -174,7 +196,7 @@ function convertImage(fileName, userId){
 }
 
 function width(w, fileName, newName, userId) {
-    var dir = "img/" + userId + "/" ;
+    var dir = "view/img/" + userId + "/" ;
     //convert image
     sharp(dir + fileName)
         .resize(w)
@@ -182,6 +204,14 @@ function width(w, fileName, newName, userId) {
 }
 //end upload image
 
+function getDate(){
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+
+    return month + "-" + day + "-" + year;
+}
 module.exports = {
     convertImage: convertImage,
     validate: validate,
@@ -192,5 +222,7 @@ module.exports = {
     getPhotosInAlbum: getPhotosInAlbum,
     getAlbumList: getAlbumList,
     addPhotoToDB: addPhotoToDB,
-    updateImgOrder: updateImgOrder
+    updateImgOrder: updateImgOrder,
+    addCollection: addCollection,
+    addAlbum: addAlbum
 };

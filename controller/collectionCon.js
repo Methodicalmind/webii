@@ -20,14 +20,6 @@ function handleLogin(req, res) {
     collectionMod.validate(successLogin, failedLogin, password, username);
 }
 //end login
-//registration
-function handleUsernameAvailability(req, res){
-    var username = req.body.username;
-    if(!collectionMod.checkName(username)) {
-        res.json("name taken");
-        return;
-    }
-}
 
 function setUserId (req){
     var username = req.session.user;
@@ -39,6 +31,7 @@ function setUserId (req){
     req.session.userId = Math.pow(sum,2);
 }
 
+//registration
 function handleRegistration(req, res) {
     var username = req.body.username;
     var password = req.body.pass;
@@ -49,17 +42,22 @@ function handleRegistration(req, res) {
     }
 
     function successRegister(){
-        req.session.username = username;
+        req.session.user = username;
         setUserId(req);
         //make a folder of the username
-        collectionMod.createUserDir(req);
-        loadCollectionList(req, res);
+        collectionMod.createUserDir(success, fail, req);
+        function success(){
+            res.redirect('/view_collect');
+        }
+        function fail(error){
+            console.log(error);
+            res.redirect("/register.html");
+        }
     }
     function failedRegister(){
         res.json("failed to registered")
     }
-    //salt the password
-    //add user to database
+
     collectionMod.storeUser(successRegister, failedRegister, username, password);
 }
 function handleViewCollection(req, res){
@@ -105,17 +103,16 @@ function handleSelectedAlbum(req, res) {
 function handleSelectedCollection(req, res) {
     var selectedAlbum;
     var albumList;
-    var photoList;
     var collect = req.params.collection;
     req.session.cName = collect;
-    // console.log("userId: " + req.session.userId);
+
     function albumSuccess(returnedList){
         albumList = returnedList;
-        selectedAlbum = albumList[0].name;
+        selectedAlbum = returnedList[0].name;
+        console.log(returnedList[0].name);
         collectionMod.getPhotosInAlbum(photoSuccess, onFail, selectedAlbum);
     }
     function photoSuccess(fileList) {
-        photoList = fileList;
         req.session.aName = selectedAlbum;
         var data = {
             u: req.session.user,
@@ -123,10 +120,9 @@ function handleSelectedCollection(req, res) {
             c: collect,
             selectedAlbum: selectedAlbum,
             aList: albumList,
-            photos: photoList,
+            photos: fileList,
         };
         res.render('admin/manage_album', data);
-        console.log(photoList);
         console.log(albumList);
     }
     function onFail() {
@@ -168,6 +164,23 @@ function handleAddPhotos(req, res){
     collectionMod.getAlbumList(albumSuccess, onFail, req.session.cName);
 }
 
+function handleNewCollection(req, res){
+    var collection = req.body.collection_name;
+    var album = req.body.album_name;
+    req.session.aName = album;
+
+    function collectionSuccess() {
+        req.session.cName = collection;
+        collectionMod.addAlbum(albumSuccess, fail, collection, album)
+    }
+    function albumSuccess() {
+        res.redirect('/manage_collection/' + collection);
+    }
+    function fail() {
+        res.redirect('/view_collect');
+    }
+    collectionMod.addCollection(collectionSuccess, fail, collection, req.session.user);
+}
 function handleImgUpload(req, res) {
     // creates form object to grab client image form object
     var form = new formidable.IncomingForm();
@@ -176,7 +189,7 @@ function handleImgUpload(req, res) {
     form.multiples = true;
 
     // store all uploads in the following directory
-    form.uploadDir = 'img/' + req.session.userId;
+    form.uploadDir = 'view/img/' + req.session.userId;
 
     // every time a file has been uploaded successfully,
     // rename it to random uniqueid with the leading filename
@@ -216,5 +229,6 @@ module.exports = {
     handleSelectedCollection: handleSelectedCollection,
     handleViewCollection: handleViewCollection,
     handleAddPhotos: handleAddPhotos,
-    handleSelectedAlbum: handleSelectedAlbum
+    handleSelectedAlbum: handleSelectedAlbum,
+    handleNewCollection: handleNewCollection
 };
