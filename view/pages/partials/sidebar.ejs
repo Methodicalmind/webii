@@ -3,7 +3,7 @@
     <div class="flex-between"><h3><%=c %></h3>
         <span class="glyphicon glyphicon-lock lock"></span></div>
 
-    <img id="cover" src="default.jpg" class="col-lg-12 col-md-12 col-sm-12">
+    <img id="cover" src="default.jpg" class="col-lg-12 col-md-12 col-sm-12" style="height:200px;">
     <ul id="sortable" class="col-lg-3 col-md-3 col-sm-3">
 
     <% aList.forEach(function(row, rowIdx) {%>
@@ -14,7 +14,7 @@
             <%=selectedAlbum%>
         </a>
     <%} else {%>
-        <a onclick="displayAlbum(this)" aname="<%=selectedAlbum%>">
+        <a onclick="displayAlbum(this)" aname="<%=row.name%>">
             <span class="glyphicon glyphicon-resize-vertical"></span>
             <%=row.name %>
         </a>

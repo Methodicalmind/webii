@@ -104,7 +104,6 @@ function handleSelectedCollection(req, res) {
     var selectedAlbum;
     var albumList;
     var collect = req.params.collection;
-    req.session.cName = collect;
 
     function albumSuccess(returnedList){
         albumList = returnedList;
