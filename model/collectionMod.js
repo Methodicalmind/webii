@@ -3,7 +3,7 @@ var fs = require('fs');
 var uniqid = require('uniqid');
 var bcrypt = require('bcrypt');
 const {Pool} = require('pg');
-const connectionString = "postgres://rsaqunjelkvsdo:7648ee0b4db9272f92569ecd81990d9914d10a26d525178126955c0c4f84325f@ec2-54-163-254-143.compute-1.amazonaws.com:5432/dbsuudb0akljb5";
+const connectionString = process.env.DATABASE_URL;
 
 const pool = new Pool({
     connectionString: connectionString
