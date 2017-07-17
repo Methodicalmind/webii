@@ -3,7 +3,7 @@ var fs = require('fs');
 var uniqid = require('uniqid');
 var bcrypt = require('bcrypt');
 const {Pool} = require('pg');
-const connectionString = "postgresql://taknodbgoebvpt:fffbe400853e7ca571a0c07a94e9e5036738722119095bd8ceabba2c50cfa7ab@ec2-50-17-217-166.compute-1.amazonaws.com:5432/d5hn8ij9iqfdpk";
+const connectionString = "postgres://rsaqunjelkvsdo:7648ee0b4db9272f92569ecd81990d9914d10a26d525178126955c0c4f84325f@ec2-54-163-254-143.compute-1.amazonaws.com:5432/dbsuudb0akljb5";
 
 const pool = new Pool({
     connectionString: connectionString
