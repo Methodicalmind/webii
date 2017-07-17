@@ -1,6 +1,22 @@
 <html>
 <head>
     <% include ../partials/head.ejs %>
+    <script type="text/javascript">
+        function showForm() {
+            document.getElementById('overlay').style.display = "block";
+            document.getElementById('overlay-form').style.display = "block";
+        }
+        function cancelForm() {
+            document.getElementById('overlay').style.display = "none";
+            document.getElementById('overlay-form').style.display = "none";
+            document.getElementById('add_collection').reset();
+        }
+        function grabCollection(e){
+            var url = "/manage_collection/";
+            url += e.getAttribute("cName");
+            window.location.href = url;
+        }
+    </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -13,10 +29,13 @@
         New Collection</button>
     </div>
     <div class="collection_thumbnail">
-      <div><img src="#"><br/>
-      </div>
-    </div>
+      <% for(var i = 0; i < c.length; i++){%>
+        <img src="img/<%=c[i].name %>_cp.jpg" cName="<%=c[i].name %>" onclick="grabCollection(this)">
+    </div><br/>
+    <h2><%=c[i].name %></h2>
+      <%}%>
   </div>
+  <% include ../forms/add_collect.ejs %>
 </div>
 </body>
 </html>

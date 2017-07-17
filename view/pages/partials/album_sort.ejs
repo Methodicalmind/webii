@@ -1,0 +1,13 @@
+<div class="sort_album">
+    <button id="save_order" class="btn btn-md btn-yellow">Save Order</button>
+    <button id="add_photos" class="btn btn-md btn-yellow">Add Photos</button>
+    <button id="delete_selected" class="btn btn-md btn-yellow">Delete Selected</button>
+    <button id="make-cover-photo" class="btn btn-md btn-yellow">Make Cover Photo</button>
+    <div class="grid grid-admin">
+        <% photos.forEach(function(row) { %>
+        <div class="grid-item">
+            <img src="/img/<%=uid%>/sm_<%= row.name %>">
+        </div>
+        <% }); %>
+    </div>
+</div>

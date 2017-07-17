@@ -146,9 +146,10 @@ input[type=checkbox]:checked + label
 }
 
 .collection_thumbnail img {
-    width: auto;
-    height: 200px;
+    width: 200px;
+    height: auto;
     margin-right: 40px;
+    z-index: 1000;
 }
 .side_menu {
 	position: fixed;
@@ -159,7 +160,7 @@ input[type=checkbox]:checked + label
 }
 .header {
     height: 50px;
-    width: 100%
+    width: 100%;
     margin-top: 50px;
     margin-bottom: 10px;
     border-bottom: 1px solid #e7e7e7;
@@ -174,7 +175,11 @@ input[type=checkbox]:checked + label
     padding-bottom: 10px;
     border-bottom: 1px solid #e7e7e7;
 }
-.loaded_php {
+.sort_album {
+    padding-top: 50px;
+    z-index: -1;
+}
+.upload_to_album {
     padding-top: 50px;
     z-index: -1;
 }

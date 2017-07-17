@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <% include ../partials/head.ejs %>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+        </script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src='../js/packery.js'></script>
+        <script src='https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.js'></script>
+        <script src="../js/manage_collection.js" type="text/javascript"></script>
+    </head>
+    <body onload="onLoad()">
+        <% include ../partials/navbar.ejs %>
+        <% include ../partials/sidebar.ejs %>
+        <!-- album title and add photos -->
+        <div class="col-lg-offset-3 col-md-offset-3  col-sm-offset-3 col-lg-9 col-md-9 col-sm-9 header"></div>
+
+        <!-- section to arrange picture order -->
+        <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3" style="clear: both;">
+        <% include ../partials/album_sort.ejs.ejs %>
+        </div>
+        <script src="../js/admin-packery.js"></script>
+        <script>
+          $( function() {
+            $( "#sortable" ).sortable({
+                placeholder: "ui-state-highlight"
+            });
+            $( "#sortable" ).disableSelection();
+          });
+        </script>
+    </body>
+</html>

@@ -1,10 +1,26 @@
 <html>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <head>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <script type="text/javascript">
+            function validate() {
+                var username = document.getElementById("username").value;
+                var p = document.getElementById("password").value;
+
+                if(username == "") {
+                    alert("username field is blank");
+                    return false;
+                }if(p == "") {
+                    alert("password field is blank");
+                    return false;
+                }
+            }
+        </script>
+    </head>
     <body>
     <div class="container">
     <h1>Site Admin Portal</h1>
-    <form method="post" action="/login"
+    <form method="post" action="/login" onsubmit="return validate()"
           class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4">
         <div class="form-group row">
           <div class="col-10">
